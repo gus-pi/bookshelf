@@ -24,6 +24,12 @@ export const loginUser = async (req, res) => {
   }
 };
 
+//logout user
+export const logoutUser = async (req, res) => {
+  res.clearCookie('token');
+  res.status(200).send({ message: 'Logged out successfully' });
+};
+
 //register user endpoint
 export const registerUser = async (req, res) => {
   try {

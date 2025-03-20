@@ -3,13 +3,14 @@ import User from '../models/UserModel.js';
 //register user endpoint
 export const registerUser = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
-    const user = await User.create({ name, email, password });
+    const { name, email, password, books } = req.body;
+    const user = await User.create({ name, email, password, books });
     if (user) {
       res.status(200).json({
         _id: user._id,
         name: user.name,
         email: user.email,
+        books: user.books,
       });
     }
   } catch (error) {
@@ -32,7 +33,7 @@ export const getAllUsers = async (req, res) => {
   }
 };
 
-//get user by id endppoint
+//get user by id
 export const getUser = async (req, res) => {
   const { id } = req.params;
   try {
@@ -47,7 +48,7 @@ export const getUser = async (req, res) => {
   }
 };
 
-//get user by id endppoint
+//delete user
 export const deleteUser = async (req, res) => {
   const { id } = req.params;
   try {

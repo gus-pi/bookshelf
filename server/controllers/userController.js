@@ -79,7 +79,30 @@ export const addBook = async (req, res) => {
     if (!user) {
       res.status(404).json({ message: 'User not found' });
     }
-    res.status(200).json({ books: user.books });
+    res.status(200).json({ message: 'added a book', books: user.books });
+  } catch (error) {
+    console.log('Error deleting user: ', error);
+    res.status(500).json({ message: 'Error deleting user' });
+  }
+};
+
+//delete book from user
+export const removeBook = async (req, res) => {
+  const { id } = req.params;
+  const { book_key } = req.body;
+  try {
+    if (!book_key) {
+      res.status(500).json({ message: 'book id required' });
+    }
+    const user = await User.findByIdAndUpdate(
+      id,
+      { $pull: { books: book_key } },
+      { new: true }
+    );
+    if (!user) {
+      res.status(404).json({ message: 'User not found' });
+    }
+    res.status(200).json({ message: 'removed a book', books: user.books });
   } catch (error) {
     console.log('Error deleting user: ', error);
     res.status(500).json({ message: 'Error deleting user' });

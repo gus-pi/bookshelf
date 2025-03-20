@@ -96,6 +96,12 @@ export const addBook = async (req, res) => {
     if (!book_key) {
       return res.status(500).json({ message: 'book id required' });
     }
+
+    // Ensure the logged-in user is accessing their own bookshelf
+    if (req.user.id !== id) {
+      return res.status(403).json({ message: 'Not authorized' });
+    }
+
     const user = await User.findByIdAndUpdate(
       id,
       { $addToSet: { books: book_key } }, // Prevent duplicates
@@ -104,6 +110,7 @@ export const addBook = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
+
     res.status(200).json({ message: 'added a book', books: user.books });
   } catch (error) {
     console.log('Error deleting user: ', error);

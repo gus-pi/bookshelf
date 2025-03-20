@@ -6,11 +6,13 @@ import {
   deleteUser,
   addBook,
   removeBook,
+  loginUser,
 } from '../controllers/userController.js';
 
 const router = express.Router();
 
-router.post('/', registerUser);
+router.post('/login', loginUser);
+router.post('/register', registerUser);
 router.get('/', getAllUsers);
 router.get('/:id', getUser);
 router.delete('/:id', deleteUser);

@@ -62,3 +62,26 @@ export const deleteUser = async (req, res) => {
     res.status(500).json({ message: 'Error deleting user' });
   }
 };
+
+//add book to user
+export const addBook = async (req, res) => {
+  const { id } = req.params;
+  const { book_key } = req.body;
+  try {
+    if (!book_key) {
+      res.status(500).json({ message: 'book id required' });
+    }
+    const user = await User.findByIdAndUpdate(
+      id,
+      { $addToSet: { books: book_key } }, // Prevent duplicates
+      { new: true }
+    );
+    if (!user) {
+      res.status(404).json({ message: 'User not found' });
+    }
+    res.status(200).json({ books: user.books });
+  } catch (error) {
+    console.log('Error deleting user: ', error);
+    res.status(500).json({ message: 'Error deleting user' });
+  }
+};

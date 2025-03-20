@@ -24,7 +24,7 @@ export const getAllUsers = async (req, res) => {
   try {
     const users = await User.find({}, 'id name email').sort({ createdAt: -1 });
     if (!users) {
-      res.status(404).json({ message: 'No users found' });
+      return res.status(404).json({ message: 'No users found' });
     }
     res.status(200).json(users);
   } catch (error) {
@@ -39,7 +39,7 @@ export const getUser = async (req, res) => {
   try {
     const user = await User.findById(id);
     if (!user) {
-      res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ message: 'User not found' });
     }
     res.status(200).json(user);
   } catch (error) {
@@ -54,7 +54,7 @@ export const deleteUser = async (req, res) => {
   try {
     const user = await User.findByIdAndDelete(id);
     if (!user) {
-      res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ message: 'User not found' });
     }
     res.status(200).json({ message: 'User deleted' });
   } catch (error) {
@@ -69,7 +69,7 @@ export const addBook = async (req, res) => {
   const { book_key } = req.body;
   try {
     if (!book_key) {
-      res.status(500).json({ message: 'book id required' });
+      return res.status(500).json({ message: 'book id required' });
     }
     const user = await User.findByIdAndUpdate(
       id,
@@ -77,7 +77,7 @@ export const addBook = async (req, res) => {
       { new: true }
     );
     if (!user) {
-      res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ message: 'User not found' });
     }
     res.status(200).json({ message: 'added a book', books: user.books });
   } catch (error) {

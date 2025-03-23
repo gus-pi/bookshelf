@@ -6,7 +6,9 @@ const Navbar = () => {
       <div className="flex-1">
         <Link to="/" className="btn btn-ghost text-3xl ">
           Bookshelf
-          <span className="text-amber-950 font-bold -ml-1">.</span>
+          <span className="text-amber-700 font-bold -ml-1">.</span>
+          <span className="text-amber-600 font-bold -ml-1">.</span>
+          <span className="text-amber-500 font-bold -ml-1">.</span>
         </Link>
       </div>
       <div className="flex-none">

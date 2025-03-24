@@ -6,7 +6,7 @@ const Home = () => {
     <div className="relative flex justify-center items-center h-screen">
       {/* Background Image with Fade Effect */}
       <div
-        className="absolute inset-0 bg-cover bg-center"
+        className="absolute inset-0 bg-cover bg-center opacity-60"
         style={{
           backgroundImage: `url(${bg_shelf})`,
           maskImage:
@@ -17,7 +17,7 @@ const Home = () => {
       />
       {/* Text Overlay */}
       <div className="flex flex-col justify-center items-center mt-5 relative z-10 text-center text-white  bg-opacity-50 p-6 rounded-lg">
-        <div className="flex flex-col ">
+        <div className="flex flex-col mb-20">
           <h1 className="text-5xl">Bookshelf</h1>
           <p className="text-xs ml-auto">by Gustavo Pinedo</p>
         </div>

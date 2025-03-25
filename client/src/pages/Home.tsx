@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import bg_shelf from '../assets/bg_shelf.jpg';
 
 const Home = () => {
-  const temp_login = false;
+  const temp_login = true;
   return (
     <div className="relative flex justify-center items-center h-screen max-h-[85vh]">
       {/* Background Image with Fade Effect */}
@@ -53,8 +53,16 @@ const Home = () => {
               others are reading as well.
             </p>
             <h2 className="mt-10">
-              <Link to="/login">Sign in</Link> to get started. Don't have an
-              account? Register
+              <Link to="/login" className="text-amber-600 hover:text-amber-700">
+                Sign in
+              </Link>{' '}
+              to get started. Don't have an account?{' '}
+              <Link
+                to="/register"
+                className="text-amber-600 hover:text-amber-700"
+              >
+                Register.
+              </Link>
             </h2>
           </div>
         )}

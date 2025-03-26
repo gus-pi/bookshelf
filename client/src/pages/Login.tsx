@@ -1,4 +1,5 @@
 import { AuthContext } from '@/context/AuthContext';
+import axios from 'axios';
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -20,18 +21,12 @@ const Login = () => {
     e.preventDefault();
     setError(''); // Clear previous errors
     try {
-      const response = await fetch(`http://localhost:5000/api/users/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      });
-      const data = await response.json();
-      if (response.ok) {
-        setUserCredentials(data.user);
-        navigate('/'); // Redirect to home
-      } else {
-        setError(data.message || 'Login failed');
-      }
+      const response = await axios.post(
+        'http://localhost:5000/api/users/login',
+        { email, password }
+      );
+      setUserCredentials(response.data.user);
+      navigate('/');
     } catch (error: any) {
       setError(
         error.response?.data?.message || error.message || 'Login failed'

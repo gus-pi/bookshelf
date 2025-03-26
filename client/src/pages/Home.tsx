@@ -11,7 +11,7 @@ const Home = () => {
   }
 
   const { userCredentials, setUserCredentials } = authContext;
-  console.log(userCredentials);
+
   return (
     <div className="relative flex justify-center items-center h-screen max-h-[85vh]">
       {/* Background Image with Fade Effect */}

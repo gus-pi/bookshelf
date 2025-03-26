@@ -1,8 +1,17 @@
 import { Link } from 'react-router-dom';
 import bg_shelf from '../assets/bg_shelf.jpg';
+import { AuthContext } from '@/context/AuthContext';
+import { useContext } from 'react';
 
 const Home = () => {
-  const temp_login = true;
+  const authContext = useContext(AuthContext);
+
+  if (!authContext) {
+    throw new Error('AuthContext.Provider is missing!');
+  }
+
+  const { userCredentials, setUserCredentials } = authContext;
+  console.log(userCredentials);
   return (
     <div className="relative flex justify-center items-center h-screen max-h-[85vh]">
       {/* Background Image with Fade Effect */}
@@ -23,9 +32,9 @@ const Home = () => {
           <p className="text-xs ml-auto">by Gustavo Pinedo</p>
         </div>
 
-        {temp_login ? (
+        {userCredentials?.name ? (
           <div>
-            <h2>Hello User</h2>
+            <h2>Hello {userCredentials.name}</h2>
             <p className="mt-5">
               Organize your own
               <Link

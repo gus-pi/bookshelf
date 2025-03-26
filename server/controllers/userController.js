@@ -12,7 +12,7 @@ export const loginUser = async (req, res) => {
     if (user && passwordMatch) {
       generateToken(res, user._id);
       return res.status(201).json({
-        message: 'Logged in successfull',
+        message: 'Logged in successful',
         user: { id: user._id, name: user.name, email: user.email },
       });
     } else {
@@ -81,12 +81,19 @@ export const getUser = async (req, res) => {
 
 //get logged in user profile
 export const getUserProfile = async (req, res) => {
-  const user = {
-    id: req.user._id,
-    name: req.user.name,
-    email: req.user.email,
-  };
-  res.status(200).json(user);
+  try {
+    if (!req.user) {
+      return res.status(401).json({ message: 'Not authenticated' });
+    }
+    res.status(200).json({
+      id: req.user._id,
+      name: req.user.name,
+      email: req.user.email,
+    });
+  } catch (error) {
+    console.error('Error fetching user profile:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
 };
 
 //delete user

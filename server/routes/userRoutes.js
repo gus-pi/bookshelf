@@ -22,6 +22,6 @@ router.get('/:id', getUser);
 router.delete('/:id', deleteUser);
 router.post('/:id/books', protect, addBook);
 router.delete('/:id/books', protect, removeBook);
-router.delete('/profile', protect, getUserProfile);
+router.get('/profile', protect, getUserProfile);
 
 export default router;

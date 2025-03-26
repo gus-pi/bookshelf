@@ -79,6 +79,16 @@ export const getUser = async (req, res) => {
   }
 };
 
+//get logged in user profile
+export const getUserProfile = async (req, res) => {
+  const user = {
+    id: req.user._id,
+    name: req.user.name,
+    email: req.user.email,
+  };
+  res.status(200).json(user);
+};
+
 //delete user
 export const deleteUser = async (req, res) => {
   const { id } = req.params;

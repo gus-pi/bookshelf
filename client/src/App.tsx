@@ -15,6 +15,11 @@ const App = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+          setUserCredentials(JSON.parse(storedUser));
+          return;
+        }
         const { data } = await axios.get('/api/users/auth/profile', {
           withCredentials: true,
         });

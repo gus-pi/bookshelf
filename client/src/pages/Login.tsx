@@ -25,7 +25,10 @@ const Login = () => {
         'http://localhost:5000/api/users/login',
         { email, password }
       );
-      setUserCredentials(response.data.user);
+      const userData = response.data.user;
+      setUserCredentials(userData);
+      console.log(userData);
+      localStorage.setItem('user', JSON.stringify(userData)); // Store user data
       navigate('/');
     } catch (error: any) {
       setError(

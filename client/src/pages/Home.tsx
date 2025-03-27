@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import bg_shelf from '../assets/bg_shelf.jpg';
-import { AuthContext } from '@/context/AuthContext';
 import { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
 
 const Home = () => {
   const authContext = useContext(AuthContext);

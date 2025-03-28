@@ -2,7 +2,7 @@
 export const getBookData = async (req, res) => {
   const { id } = req.params;
   try {
-    const response = await fetch(`https://openlibrary.org/works/${id}.json`);
+    const response = await fetch(`https://openlibrary.org/books/${id}.json`);
 
     if (!response.ok) {
       throw new Error('Failed to fetch book data');

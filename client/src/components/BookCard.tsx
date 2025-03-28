@@ -1,3 +1,4 @@
+import { getApiUrl } from '@/lib/utils';
 import { fetchBookData } from '@/services/bookService';
 import { useEffect, useState } from 'react';
 
@@ -12,9 +13,7 @@ const BookCard = ({ bookCode }: { bookCode: string }) => {
   // Fetch book details from Open Library API
   const fetchBookDetails = async (bookCode: string) => {
     try {
-      const response = await fetch(
-        `https://openlibrary.org/works/${bookCode}.json`
-      );
+      const response = await fetch(`${getApiUrl()}/books/${bookCode}`);
       const data = await response.json();
 
       setBook({ title: data.title, author: data.author });

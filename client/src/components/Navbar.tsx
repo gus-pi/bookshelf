@@ -24,7 +24,7 @@ const Navbar = () => {
       <div className="flex-none">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <Link to="/shelves">Shelves</Link>
+            <Link to={`/user/${userCredentials?.id}`}>My shelf</Link>
           </li>
           <li>
             {userCredentials ? (

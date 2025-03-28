@@ -1,3 +1,4 @@
+import BookCard from '@/components/BookCard';
 import { AuthContext } from '@/context/AuthContext';
 import { fetchUserBooks } from '@/services/bookService';
 import { useContext, useEffect, useState } from 'react';
@@ -31,7 +32,11 @@ const Bookshelf = () => {
       <h1>{userCredentials?.name}'s books</h1>
       <ul>
         {books.length > 0 ? (
-          books.map((book, index) => <li key={index}>{book}</li>)
+          books.map((book, index) => (
+            <li key={index}>
+              <BookCard bookCode={book} />
+            </li>
+          ))
         ) : (
           <p>No books found.</p>
         )}

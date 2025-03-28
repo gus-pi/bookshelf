@@ -1,7 +1,16 @@
+import { AuthContext } from '@/context/AuthContext';
+import { log } from 'console';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
-  const temp_login = true;
+  const authContext = useContext(AuthContext);
+
+  if (!authContext) {
+    throw new Error('AuthContext.Provider is missing!');
+  }
+
+  const { userCredentials, logout } = authContext;
   return (
     <div className="navbar bg-amber-900 text-slate-100 sticky top-0 z-10">
       <div className="flex-1">
@@ -18,7 +27,7 @@ const Navbar = () => {
             <Link to="/shelves">Shelves</Link>
           </li>
           <li>
-            {temp_login ? (
+            {userCredentials ? (
               <details>
                 <summary>Account</summary>
                 <ul className="bg-base-100 rounded-t-none p-2">
@@ -26,7 +35,12 @@ const Navbar = () => {
                     <Link to="/account">Edit account</Link>
                   </li>
                   <li>
-                    <Link to="/logout">Logout</Link>
+                    <button
+                      className="btn btn-outline secondary"
+                      onClick={logout}
+                    >
+                      Logout
+                    </button>
                   </li>
                 </ul>
               </details>

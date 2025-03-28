@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect, ReactNode } from 'react';
 import axios from 'axios';
+import { getApiUrl } from '@/lib/utils';
 
 type UserCredentials = {
   id: string;
@@ -33,7 +34,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const fetchUser = async () => {
     try {
-      const { data } = await axios.get('/api/users/auth/profile', {
+      const { data } = await axios.get(`${getApiUrl()}/users/auth/profile`, {
         withCredentials: true,
       });
       setUserCredentials(data);
@@ -43,7 +44,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const logout = () => {
+  const logout = async () => {
+    await axios.post(`${getApiUrl()}/users/logout`);
     localStorage.removeItem('user');
     setUserCredentials(null);
   };

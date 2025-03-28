@@ -1,3 +1,4 @@
+import { getApiUrl } from '@/lib/utils';
 import { AuthContext } from '../context/AuthContext';
 import axios from 'axios';
 import { useContext, useState } from 'react';
@@ -21,10 +22,10 @@ const Login = () => {
     e.preventDefault();
     setError(''); // Clear previous errors
     try {
-      const response = await axios.post(
-        'http://localhost:5000/api/users/login',
-        { email, password }
-      );
+      const response = await axios.post(`${getApiUrl()}/users/login`, {
+        email,
+        password,
+      });
       const userData = response.data.user;
       setUserCredentials(userData);
       console.log(userData);

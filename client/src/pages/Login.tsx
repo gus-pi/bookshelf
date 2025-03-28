@@ -3,6 +3,7 @@ import { AuthContext } from '../context/AuthContext';
 import axios from 'axios';
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { loginUser } from '@/services/authService';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -22,13 +23,9 @@ const Login = () => {
     e.preventDefault();
     setError(''); // Clear previous errors
     try {
-      const response = await axios.post(`${getApiUrl()}/users/login`, {
-        email,
-        password,
-      });
-      const userData = response.data.user;
+      const userData = await loginUser(email, password);
       setUserCredentials(userData);
-      console.log(userData);
+
       localStorage.setItem('user', JSON.stringify(userData)); // Store user data
       navigate('/');
     } catch (error: any) {

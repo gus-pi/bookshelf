@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect, ReactNode } from 'react';
 import axios from 'axios';
 import { getApiUrl } from '@/lib/utils';
+import { getAuthenticatedUser } from '@/services/authService';
 
 type UserCredentials = {
   id: string;
@@ -34,9 +35,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const fetchUser = async () => {
     try {
-      const { data } = await axios.get(`${getApiUrl()}/users/auth/profile`, {
-        withCredentials: true,
-      });
+      const data = await getAuthenticatedUser();
       setUserCredentials(data);
     } catch (error) {
       console.error('Error fetching user:', error);

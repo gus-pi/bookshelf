@@ -3,6 +3,6 @@ import { getBookData } from '../controllers/bookController.js';
 
 const router = express.Router();
 
-router.get('/:id', getBookData);
+router.get('/:ISBN', getBookData);
 
 export default router;

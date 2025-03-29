@@ -97,7 +97,7 @@ const Login = () => {
             // title="Must be more than 8 characters, including number, lowercase letter, uppercase letter"
           />
         </label>
-        <p className="validator-hint hidden">
+        {/* <p className="validator-hint hidden">
           Must be more than 8 characters, including
           <br />
           At least one number
@@ -105,7 +105,7 @@ const Login = () => {
           At least one lowercase letter
           <br />
           At least one uppercase letter
-        </p>
+        </p> */}
         <button type="submit" className="btn btn-soft btn-primary my-5">
           submit
         </button>

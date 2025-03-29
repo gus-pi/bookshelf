@@ -25,7 +25,13 @@ export const getBookData = async (req, res) => {
       }
     }
 
-    const data = { title: bookData.title, author: authorName };
+    const coverImage = `https://covers.openlibrary.org/b/isbn/${ISBN}.jpg`;
+
+    const data = {
+      title: bookData.title,
+      author: authorName,
+      cover: coverImage,
+    };
 
     res.status(200).json(data);
   } catch (error) {

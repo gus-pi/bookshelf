@@ -23,9 +23,12 @@ const Navbar = () => {
       </div>
       <div className="flex-none">
         <ul className="menu menu-horizontal px-1">
-          <li>
-            <Link to={`/user/${userCredentials?.id}`}>My shelf</Link>
-          </li>
+          {userCredentials && (
+            <li>
+              <Link to={`/user/${userCredentials?.id}`}>My shelf</Link>
+            </li>
+          )}
+
           <li>
             {userCredentials ? (
               <details>

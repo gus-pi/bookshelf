@@ -1,4 +1,3 @@
-import { getApiUrl } from '@/lib/utils';
 import { fetchBookData } from '@/services/bookService';
 import { useEffect, useState } from 'react';
 
@@ -9,16 +8,19 @@ type BookDetails = {
 
 const BookCard = ({ bookCode }: { bookCode: string }) => {
   const [book, setBook] = useState<BookDetails>();
+  const [loading, setLoading] = useState(false);
 
   // Fetch book details from Open Library API
-  const fetchBookDetails = async (bookCode: string) => {
+  const fetchBookDetails = async (bookISBN: string) => {
     try {
-      const response = await fetch(`${getApiUrl()}/books/${bookCode}`);
-      const data = await response.json();
+      setLoading(true);
+      const bookData = await fetchBookData(bookISBN);
 
-      setBook({ title: data.title, author: data.author });
+      setBook({ title: bookData.title, author: bookData.author });
     } catch (error) {
       console.error('Error fetching book details', error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -28,7 +30,13 @@ const BookCard = ({ bookCode }: { bookCode: string }) => {
 
   return (
     <div>
-      {book?.title} by {book?.author}
+      {loading ? (
+        <div>Loading...</div>
+      ) : (
+        <div>
+          {book?.title} by {book?.author}
+        </div>
+      )}
     </div>
   );
 };

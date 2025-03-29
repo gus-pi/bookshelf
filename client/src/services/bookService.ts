@@ -14,12 +14,9 @@ export const fetchUserBooks = async (userId: string) => {
 
 export const fetchBookData = async (bookISBN: string) => {
   try {
-    const response = await axios.get(
-      `https://openlibrary.org/isbn/${bookISBN}`,
-      { withCredentials: false }
-    );
-    console.log(response);
-    return response;
+    const response = await fetch(`${getApiUrl()}/books/${bookISBN}`);
+    const data = await response.json();
+    return data;
   } catch (error) {
     console.error('Error fetching books:', error);
     throw new Error('Failed to fetch books');

@@ -16,6 +16,7 @@ export const fetchBookData = async (bookISBN: string) => {
   try {
     const response = await fetch(`${getApiUrl()}/books/${bookISBN}`);
     const data = await response.json();
+    console.log('data', data);
     return data;
   } catch (error) {
     console.error('Error fetching books:', error);

@@ -39,9 +39,20 @@ const BookCard = ({ bookCode }: { bookCode: string }) => {
       {loading ? (
         <div>Loading...</div>
       ) : (
-        <div>
-          <img src={book?.coverURL} />
-          {book?.title} by {book?.author}
+        <div className="card w-48 h-68 shadow-md  relative overflow-hidden">
+          <figure>
+            <img
+              src={book?.coverURL}
+              alt="Shoes"
+              className="transition-opacity duration-300 rounded-md"
+            />
+          </figure>
+          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-0 transition-opacity duration-300 text-white text-center opacity-0 hover:opacity-75">
+            <div>
+              <h2 className="card-title">{book?.title}</h2>
+              <p>{book?.author}</p>
+            </div>
+          </div>
         </div>
       )}
     </div>

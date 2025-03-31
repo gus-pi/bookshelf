@@ -39,3 +39,24 @@ export const getBookData = async (req, res) => {
     res.status(500).json({ message: 'Error fetching book' });
   }
 };
+
+export const searchBooks = async (req, res) => {
+  const { query } = req.query;
+  try {
+    const response = await fetch(
+      `https://openlibrary.org/search.json?q=${query}&fields=key,title,author_name,editions,editions.key,editions.title,editions.ebook_access,editions.language`
+    );
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch search data');
+    }
+    const data = await response.json();
+
+    const docs = data.docs;
+
+    res.status(200).json(docs);
+  } catch (error) {
+    console.log('Error searching book: ', error);
+    res.status(500).json({ message: 'Error searching book' });
+  }
+};

@@ -1,6 +1,7 @@
 import { BookResult } from '@/lib/types';
 import { searchBooks } from '@/services/bookService';
 import { useState } from 'react';
+import SearchResult from './SearchResult';
 
 const SearchBooks = () => {
   const [query, setQuery] = useState('');
@@ -30,7 +31,10 @@ const SearchBooks = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col items-center gap-2"
+      >
         <label className="input">
           <svg
             className="h-[1em] opacity-50"
@@ -57,7 +61,7 @@ const SearchBooks = () => {
         </label>
         <button
           type="submit" // Change to type="submit" for form submission
-          className="border rounded-md hover:cursor-pointer"
+          className="btn btn-soft btn-primary"
           disabled={loading} // Disable button while loading
         >
           {loading ? 'Searching...' : 'Search'}
@@ -66,10 +70,10 @@ const SearchBooks = () => {
 
       {error && <p className="text-red-500">{error}</p>}
 
-      <ul>
+      <ul className="mt-5">
         {results?.map((result) => (
           <li key={result.key}>
-            {result.title} by {result.author_name[0]}
+            <SearchResult book={result} />
           </li>
         ))}
       </ul>

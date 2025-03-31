@@ -42,9 +42,10 @@ export const getBookData = async (req, res) => {
 
 export const searchBooks = async (req, res) => {
   const { query } = req.query;
+  const limit = 10;
   try {
     const response = await fetch(
-      `https://openlibrary.org/search.json?q=${query}&fields=key,title,author_name,editions,editions.key,editions.title,editions.ebook_access,editions.language`
+      `https://openlibrary.org/search.json?q=${query}&fields=key,title,author_name,editions,editions.key,editions.title,editions.ebook_access,editions.language&limit=${limit}`
     );
 
     if (!response.ok) {

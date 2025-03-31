@@ -3,3 +3,9 @@ export type UserCredentials = {
   name: string;
   email: string;
 };
+
+export type BookResult = {
+  title: string,
+  author_name: string[],
+  key: string
+}

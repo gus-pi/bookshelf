@@ -1,11 +1,6 @@
+import { BookDetails } from '@/lib/types';
 import { fetchBookData } from '@/services/bookService';
 import { useEffect, useState } from 'react';
-
-type BookDetails = {
-  author: string;
-  title: string;
-  coverURL: string;
-};
 
 const BookCard = ({ bookCode }: { bookCode: string }) => {
   const [book, setBook] = useState<BookDetails>();

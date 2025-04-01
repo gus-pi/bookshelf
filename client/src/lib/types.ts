@@ -5,7 +5,13 @@ export type UserCredentials = {
 };
 
 export type BookResult = {
-  title: string,
-  author_name: string[],
-  key: string
-}
+  title: string;
+  author_name: string[];
+  editions?: { docs?: { key: string }[] };
+};
+
+export type BookDetails = {
+  author: string;
+  title: string;
+  coverURL: string;
+};

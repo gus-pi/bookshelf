@@ -72,7 +72,7 @@ const SearchBooks = () => {
 
       <ul className="mt-5">
         {results?.map((result) => (
-          <li key={result.key}>
+          <li key={result.editions?.docs?.[0]?.key}>
             <SearchResult book={result} />
           </li>
         ))}

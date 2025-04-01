@@ -34,7 +34,7 @@ const BookCard = ({ bookCode }: { bookCode: string }) => {
       {loading ? (
         <div>Loading...</div>
       ) : (
-        <div className="card w-48 h-68 shadow-md  relative overflow-hidden">
+        <div className="card w-48 h-68 shadow-md bg-accent-content relative overflow-hidden">
           <figure>
             <img
               src={book?.coverURL}

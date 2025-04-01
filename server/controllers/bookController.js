@@ -72,10 +72,6 @@ export const getBookDataByKey = async (req, res) => {
     if (bookData.covers) {
       const coverId = bookData.covers[0];
       coverUrl = `https://covers.openlibrary.org/b/id/${coverId}.jpg`;
-    } else if (bookData.isbn_10) {
-      coverUrl = `https://covers.openlibrary.org/b/isbn/${bookData.isbn_10}.jpg`;
-    } else if (bookData.isbn_13) {
-      coverUrl = `https://covers.openlibrary.org/b/isbn/${bookData.isbn_13}.jpg`;
     }
 
     const data = {

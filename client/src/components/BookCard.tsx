@@ -8,10 +8,10 @@ const BookCard = ({ bookCode }: { bookCode: string }) => {
   const [loading, setLoading] = useState(false);
 
   // Fetch book details from Open Library API
-  const fetchBookDetails = async (bookISBN: string) => {
+  const fetchBookDetails = async (bookKey: string) => {
     try {
       setLoading(true);
-      const bookData = await fetchBookData(bookISBN);
+      const bookData = await fetchBookData(bookKey);
 
       setBook({
         title: bookData.title,

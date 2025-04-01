@@ -1,9 +1,12 @@
 import express from 'express';
-import { getBookData, searchBooks } from '../controllers/bookController.js';
+import {
+  getBookDataByKey,
+  searchBooks,
+} from '../controllers/bookController.js';
 
 const router = express.Router();
 
-router.get('/:ISBN', getBookData);
+router.get('/:key', getBookDataByKey);
 router.get('/', searchBooks);
 
 export default router;

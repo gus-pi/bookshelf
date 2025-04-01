@@ -70,10 +70,10 @@ const SearchBooks = () => {
 
       {error && <p className="text-red-500">{error}</p>}
 
-      <ul className="mt-5">
+      <ul className="mt-5 grid grid-cols-3">
         {results?.map((result) => (
           <li key={result.editions?.docs?.[0]?.key}>
-            <SearchResult book={result} />
+            {<SearchResult book={result} />}
           </li>
         ))}
       </ul>

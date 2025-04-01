@@ -11,9 +11,9 @@ export const fetchUserBooks = async (userId: string) => {
   }
 };
 
-export const fetchBookData = async (bookISBN: string) => {
+export const fetchBookData = async (bookKey: string) => {
   try {
-    const response = await fetch(`${getApiUrl()}/books/${bookISBN}`);
+    const response = await fetch(`${getApiUrl()}${bookKey}`);
     const data = await response.json();
     return data;
   } catch (error) {

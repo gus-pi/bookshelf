@@ -29,7 +29,7 @@ const Home = () => {
       <div className="flex flex-col justify-center items-center mt-5 relative z-10 text-center text-white  bg-opacity-50 p-6 rounded-lg">
         <div className="flex flex-col mb-10">
           <h1 className="text-5xl">Bookshelf</h1>
-          <p className="text-xs ml-auto">by Gustavo Pinedo</p>
+          <p className="text-xs ml-auto">v 1.0</p>
         </div>
 
         {userCredentials?.name ? (
@@ -38,7 +38,7 @@ const Home = () => {
             <p className="mt-5">
               Organize your own
               <Link
-                to="user-bookshelf"
+                to={`/user/${userCredentials.id}`}
                 className="text-amber-600 hover:text-amber-700"
               >
                 {' '}

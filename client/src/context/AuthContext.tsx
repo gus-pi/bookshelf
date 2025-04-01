@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       const data = await getAuthenticatedUser();
       setUserCredentials(data);
     } catch (error) {
-      console.error('Error fetching user:', error);
+      console.error('User not logged in');
       setUserCredentials(null);
     }
   };

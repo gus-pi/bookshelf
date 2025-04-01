@@ -1,11 +1,14 @@
 import BookCard from '@/components/BookCard';
 import { AuthContext } from '@/context/AuthContext';
+import { getApiUrl } from '@/lib/utils';
 import { fetchUserBooks } from '@/services/bookService';
+import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 const Bookshelf = () => {
   const [books, setBooks] = useState<string[]>([]);
+  const [user, setUser] = useState('');
   const params = useParams();
 
   const userId = params.id;
@@ -16,10 +19,17 @@ const Bookshelf = () => {
   }
   const { userCredentials } = authContext;
 
+  const getUserById = async (id: string) => {
+    const { data } = await axios.get(`${getApiUrl()}/users/${id}`);
+    return data.name as string;
+  };
+
   const getBooks = async () => {
     try {
-      if (userCredentials) {
-        const booksData = await fetchUserBooks(userCredentials?.id);
+      if (userId) {
+        const booksData = await fetchUserBooks(userId);
+        const username = await getUserById(userId);
+        setUser(username);
         setBooks(booksData);
       }
     } catch (error) {
@@ -29,14 +39,14 @@ const Bookshelf = () => {
 
   useEffect(() => {
     getBooks();
-  }, [userCredentials]);
+  }, [userId]);
 
   return (
     <div className="flex flex-col items-center h-[100vh] bg-teal-950 bg-opacity-20">
       {userCredentials ? (
         <h1 className="text-3xl my-5 text-slate-200">Your shelf</h1>
       ) : (
-        <h1 className="text-3xl my-5 text-slate-200">user {userId} books</h1>
+        <h1 className="text-3xl my-5 text-slate-200">{user}'s books</h1>
       )}
 
       <ul className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">

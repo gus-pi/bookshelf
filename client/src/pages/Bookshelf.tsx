@@ -43,18 +43,20 @@ const Bookshelf = () => {
 
   return (
     <div className="flex flex-col items-center h-[100vh] bg-teal-950 bg-opacity-20">
-      <div className="flex items-center gap-5">
+      <div>
         {userCredentials?.name === user ? (
-          <h1 className="text-3xl my-5 text-slate-200">Your shelf</h1>
+          <div className="flex items-center gap-5">
+            <h1 className="text-3xl my-5 text-slate-200">Your shelf</h1>
+            <Link
+              to={`/user/${userCredentials?.id}/add`}
+              className="btn btn-outline btn-accent btn-sm"
+            >
+              Add a book
+            </Link>
+          </div>
         ) : (
           <h1 className="text-3xl my-5 text-slate-200">{user}'s books</h1>
         )}
-        <Link
-          to={`/user/${userCredentials?.id}/add`}
-          className="btn btn-outline btn-accent btn-sm"
-        >
-          Add a book
-        </Link>
       </div>
 
       <ul className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">

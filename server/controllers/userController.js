@@ -113,10 +113,12 @@ export const deleteUser = async (req, res) => {
 
 //add book to user
 export const addBook = async (req, res) => {
+  console.log('Received params:', req.params);
+  console.log('Received body:', req.body); // <-- Debug here
   const { id } = req.params;
-  const { book_key } = req.body;
+  const { bookKey } = req.body;
   try {
-    if (!book_key) {
+    if (!bookKey) {
       return res.status(500).json({ message: 'book id required' });
     }
 
@@ -127,7 +129,7 @@ export const addBook = async (req, res) => {
 
     const user = await User.findByIdAndUpdate(
       id,
-      { $addToSet: { books: book_key } }, // Prevent duplicates
+      { $addToSet: { books: bookKey } }, // Prevent duplicates
       { new: true }
     );
     if (!user) {
@@ -136,22 +138,22 @@ export const addBook = async (req, res) => {
 
     res.status(200).json({ message: 'added a book', books: user.books });
   } catch (error) {
-    console.log('Error deleting user: ', error);
-    res.status(500).json({ message: 'Error deleting user' });
+    console.log('Error adding book: ', error);
+    res.status(500).json({ message: 'Error adding book' });
   }
 };
 
 //delete book from user
 export const removeBook = async (req, res) => {
   const { id } = req.params;
-  const { book_key } = req.body;
+  const { bookKey } = req.body;
   try {
-    if (!book_key) {
+    if (!bookKey) {
       res.status(500).json({ message: 'book id required' });
     }
     const user = await User.findByIdAndUpdate(
       id,
-      { $pull: { books: book_key } },
+      { $pull: { books: bookKey } },
       { new: true }
     );
     if (!user) {
@@ -159,7 +161,7 @@ export const removeBook = async (req, res) => {
     }
     res.status(200).json({ message: 'removed a book', books: user.books });
   } catch (error) {
-    console.log('Error deleting user: ', error);
-    res.status(500).json({ message: 'Error deleting user' });
+    console.log('Error removing user book: ', error);
+    res.status(500).json({ message: 'Error removing user book' });
   }
 };

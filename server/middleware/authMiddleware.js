@@ -2,11 +2,12 @@ import jwt from 'jsonwebtoken';
 import User from '../models/UserModel.js';
 
 const protect = async (req, res, next) => {
+  const token = req.cookies.jwt;
+  console.log('🔹 Received Token:', token); // Debug log
+  if (!token) {
+    return res.status(401).json({ message: 'Not authorized, no token' });
+  }
   try {
-    const token = req.cookies.jwt;
-    if (!token) {
-      return res.status(401).json({ message: 'Not authorized, no token' });
-    }
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.user = await User.findById(decoded.userId).select('-password'); // Exclude password for security
 

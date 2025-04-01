@@ -1,5 +1,4 @@
 import { AuthContext } from '@/context/AuthContext';
-import { log } from 'console';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 

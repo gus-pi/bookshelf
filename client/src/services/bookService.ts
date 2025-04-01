@@ -36,3 +36,22 @@ export const searchBooks = async (query: string) => {
     throw new Error('Failed to fetch books');
   }
 };
+
+export const addBookToShelf = async (userId: string, bookKey: string) => {
+  try {
+    console.log("🔹 Sending request..."); // Debug log
+
+    const response = await axios.post(
+      `${getApiUrl()}/users/${userId}/books`,
+      { bookKey },
+      { withCredentials: true } // Ensures cookies (JWT) are sent
+    );
+
+    console.log("✅ Response received:", response.data);
+    return response.data;
+  } catch (error: any) {
+    console.error("❌ Request failed:", error.response ? error.response.data : error.message);
+    throw new Error("Failed to add book");
+  }
+};
+

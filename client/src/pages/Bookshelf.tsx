@@ -44,7 +44,7 @@ const Bookshelf = () => {
   return (
     <div className="flex flex-col items-center h-[100vh] bg-teal-950 bg-opacity-20">
       <div className="flex items-center gap-5">
-        {userCredentials ? (
+        {userCredentials?.name === user ? (
           <h1 className="text-3xl my-5 text-slate-200">Your shelf</h1>
         ) : (
           <h1 className="text-3xl my-5 text-slate-200">{user}'s books</h1>

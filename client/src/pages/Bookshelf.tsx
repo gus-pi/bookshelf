@@ -42,7 +42,7 @@ const Bookshelf = () => {
   }, [userId]);
 
   return (
-    <div className="flex flex-col items-center h-[100vh] bg-teal-950 bg-opacity-20">
+    <div className="flex flex-col items-center bg-teal-950 bg-opacity-20 pb-10 lg:h-[100vh]">
       <div>
         {userCredentials?.name === user ? (
           <div className="flex items-center gap-5">
@@ -59,7 +59,7 @@ const Bookshelf = () => {
         )}
       </div>
 
-      <ul className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+      <ul className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {books.length > 0 ? (
           books.map((book, index) => (
             <li key={index}>

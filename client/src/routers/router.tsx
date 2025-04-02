@@ -5,6 +5,7 @@ import Home from '@/pages/Home';
 import Login from '@/pages/Login';
 import Register from '@/pages/Register';
 import { createBrowserRouter } from 'react-router-dom';
+import PrivateRoute from './PrivateRoute';
 
 const router = createBrowserRouter([
   {
@@ -20,7 +21,14 @@ const router = createBrowserRouter([
         path: '/user/:id',
         element: <Bookshelf />,
       },
-      { path: '/user/:id/add', element: <AddBook /> },
+      {
+        path: '/user/:id/add',
+        element: (
+          <PrivateRoute>
+            <AddBook />
+          </PrivateRoute>
+        ),
+      },
       { path: '/login', element: <Login /> },
       { path: '/register', element: <Register /> },
     ],

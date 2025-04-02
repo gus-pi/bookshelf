@@ -3,7 +3,6 @@ import User from '../models/UserModel.js';
 
 const protect = async (req, res, next) => {
   const token = req.cookies.jwt;
-  console.log('🔹 Received Token:', token); // Debug log
   if (!token) {
     return res.status(401).json({ message: 'Not authorized, no token' });
   }

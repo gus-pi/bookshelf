@@ -44,7 +44,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const logout = async () => {
-    await axios.post(`${getApiUrl()}/users/logout`);
+    await axios.post(
+      `${getApiUrl()}/users/logout`,
+      {},
+      { withCredentials: true }
+    );
     localStorage.removeItem('user');
     setUserCredentials(null);
   };

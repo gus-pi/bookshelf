@@ -26,7 +26,7 @@ export const loginUser = async (req, res) => {
 
 //logout user
 export const logoutUser = async (req, res) => {
-  res.clearCookie('token');
+  res.clearCookie('jwt');
   res.status(200).send({ message: 'Logged out successfully' });
 };
 
@@ -113,8 +113,6 @@ export const deleteUser = async (req, res) => {
 
 //add book to user
 export const addBook = async (req, res) => {
-  console.log('Received params:', req.params);
-  console.log('Received body:', req.body); // <-- Debug here
   const { id } = req.params;
   const { bookKey } = req.body;
   try {

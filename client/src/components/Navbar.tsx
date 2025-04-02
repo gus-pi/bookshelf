@@ -27,7 +27,9 @@ const Navbar = () => {
               <Link to={`/user/${userCredentials?.id}`}>My shelf</Link>
             </li>
           )}
-
+          <li>
+            <Link to={`/shelves`}>Users</Link>
+          </li>
           <li>
             {userCredentials ? (
               <details>

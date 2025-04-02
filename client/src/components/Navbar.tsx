@@ -35,6 +35,9 @@ const Navbar = () => {
               <details>
                 <summary>Account</summary>
                 <ul className="bg-base-100 rounded-t-none p-2">
+                  <li className="hover:cursor-none bg-amber-600 rounded-sm">
+                    <p>{userCredentials.name}</p>
+                  </li>
                   <li>
                     <Link to="/account">Edit account</Link>
                   </li>

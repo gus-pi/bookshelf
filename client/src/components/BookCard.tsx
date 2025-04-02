@@ -32,7 +32,7 @@ const BookCard = ({ bookCode }: { bookCode: string }) => {
   return (
     <div>
       {loading ? (
-        <div>Loading...</div>
+        <div className="skeleton h-68 w-48" />
       ) : (
         <div className="card w-48 h-68 shadow-md bg-stone-900 relative overflow-hidden">
           <figure>

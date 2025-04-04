@@ -38,7 +38,7 @@ const Login = () => {
   return (
     <div className="text-slate-100 flex flex-col items-center bg-black">
       <h1 className="text-5xl mt-20">Sign in</h1>
-      {error && <p className="text-red-500">{error}</p>}{' '}
+
       <form onSubmit={handleSubmit} className="flex flex-col mt-10">
         <label className="input validator mb-1">
           <svg
@@ -67,7 +67,6 @@ const Login = () => {
           />
         </label>
         <div className="validator-hint hidden">Enter valid email address</div>
-
         <label className="input validator">
           <svg
             className="h-[1em] opacity-50"
@@ -106,6 +105,7 @@ const Login = () => {
           <br />
           At least one uppercase letter
         </p> */}
+        {error && <p className="text-red-500 mt-2">{error}</p>}{' '}
         <button type="submit" className="btn btn-soft btn-primary my-5">
           submit
         </button>

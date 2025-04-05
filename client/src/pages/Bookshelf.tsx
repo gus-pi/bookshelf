@@ -42,7 +42,7 @@ const Bookshelf = () => {
   }, [userId]);
 
   return (
-    <div className="flex flex-col items-center bg-teal-950 bg-opacity-20 pb-10 lg:h-[100vh]">
+    <div className="flex flex-col items-center bg-teal-950 bg-opacity-20 pb-10">
       <div>
         {userCredentials?.name === user ? (
           <div className="flex items-center gap-5">

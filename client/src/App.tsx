@@ -9,7 +9,7 @@ const App = () => {
     <AuthProvider>
       <div className="flex flex-col min-h-screen">
         <Navbar />
-        <div className="flex-grow">
+        <div className="flex-grow bg-teal-950">
           <Outlet />
         </div>
         <Footer />

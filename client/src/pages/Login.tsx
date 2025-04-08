@@ -36,7 +36,7 @@ const Login = () => {
   };
 
   return (
-    <div className="text-slate-100 flex flex-col items-center bg-black">
+    <div className="text-slate-100 flex flex-col items-center bg-teal-950">
       <h1 className="text-5xl mt-20">Sign in</h1>
 
       <form onSubmit={handleSubmit} className="flex flex-col mt-10">

@@ -13,10 +13,10 @@ const Home = () => {
   const { userCredentials, setUserCredentials } = authContext;
 
   return (
-    <div className="relative flex justify-center items-center h-screen max-h-[85vh] bg-black">
+    <div className="relative flex justify-center items-center h-screen max-h-[90vh] bg-black">
       {/* Background Image with Fade Effect */}
       <div
-        className="absolute inset-0 bg-cover bg-center opacity-60 "
+        className="absolute inset-0 bg-cover bg-center opacity-60"
         style={{
           backgroundImage: `url(${bg_shelf})`,
           maskImage:

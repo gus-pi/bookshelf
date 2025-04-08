@@ -10,6 +10,7 @@ const Bookshelf = () => {
   const [books, setBooks] = useState<string[]>([]);
   const [user, setUser] = useState('');
   const params = useParams();
+  const [editToggle, setEditToggle] = useState(false);
 
   const userId = params.id;
 
@@ -53,18 +54,30 @@ const Bookshelf = () => {
     }
   };
 
+  const handleToggleEdit = () => {
+    setEditToggle(!editToggle);
+  };
+
   return (
     <div className="flex flex-col items-center bg-teal-950 bg-opacity-20 pb-10">
       <div>
         {userCredentials?.name === user ? (
           <div className="flex items-center gap-5">
             <h1 className="text-3xl my-5 text-slate-200">Your shelf</h1>
-            <Link
-              to={`/user/${userCredentials?.id}/add`}
+            {editToggle && (
+              <Link
+                to={`/user/${userCredentials?.id}/add`}
+                className="btn btn-outline btn-success btn-sm"
+              >
+                Add a book
+              </Link>
+            )}
+            <button
               className="btn btn-outline btn-accent btn-sm"
+              onClick={handleToggleEdit}
             >
-              Add a book
-            </Link>
+              {editToggle ? <p>Done</p> : <p>Edit shelf</p>}
+            </button>
           </div>
         ) : (
           <h1 className="text-3xl my-5 text-slate-200">{user}'s books</h1>
@@ -77,7 +90,7 @@ const Bookshelf = () => {
             <li key={book}>
               <BookCard
                 bookCode={book}
-                edit={true}
+                edit={editToggle}
                 user={userId!}
                 onRemove={() => handleRemove(book)}
               />

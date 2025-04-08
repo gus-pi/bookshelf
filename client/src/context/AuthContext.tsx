@@ -2,6 +2,7 @@ import { createContext, useState, useEffect, ReactNode } from 'react';
 import axios from 'axios';
 import { getApiUrl } from '@/lib/utils';
 import { getAuthenticatedUser } from '@/services/authService';
+import { useNavigate } from 'react-router-dom';
 
 type UserCredentials = {
   id: string;
@@ -22,6 +23,8 @@ export const AuthContext = createContext<AuthContextType | null>(null);
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [userCredentials, setUserCredentials] =
     useState<UserCredentials | null>(null);
+
+  const navigate = useNavigate();
 
   // Load user from localStorage on mount
   useEffect(() => {
@@ -51,6 +54,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     );
     localStorage.removeItem('user');
     setUserCredentials(null);
+    navigate('/');
   };
 
   return (

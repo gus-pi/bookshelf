@@ -1,7 +1,7 @@
 import BookCard from '@/components/BookCard';
 import { AuthContext } from '@/context/AuthContext';
 import { getApiUrl } from '@/lib/utils';
-import { fetchUserBooks } from '@/services/bookService';
+import { fetchUserBooks, removeBook } from '@/services/bookService';
 import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
@@ -41,6 +41,18 @@ const Bookshelf = () => {
     getBooks();
   }, [userId]);
 
+  const handleRemove = async (bookCode: string) => {
+    try {
+      if (userId) {
+        await removeBook(userId, bookCode);
+        alert(`removed a book`);
+        getBooks();
+      }
+    } catch (error) {
+      console.log('Failed to remove book', error);
+    }
+  };
+
   return (
     <div className="flex flex-col items-center bg-teal-950 bg-opacity-20 pb-10">
       <div>
@@ -61,9 +73,14 @@ const Bookshelf = () => {
 
       <ul className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {books.length > 0 ? (
-          books.map((book, index) => (
-            <li key={index}>
-              <BookCard bookCode={book} />
+          books.map((book) => (
+            <li key={book}>
+              <BookCard
+                bookCode={book}
+                edit={true}
+                user={userId!}
+                onRemove={() => handleRemove(book)}
+              />
             </li>
           ))
         ) : (

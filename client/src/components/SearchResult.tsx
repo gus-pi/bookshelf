@@ -29,7 +29,12 @@ const SearchResult = ({ book }: { book: BookResult }) => {
 
   return (
     <div className="flex flex-col justify-between gap-2 px-2 rounded-sm my-2">
-      <BookCard bookCode={bookKey} />
+      <BookCard
+        bookCode={bookKey}
+        edit={false}
+        user={userId!}
+        onRemove={() => {}}
+      />
       {userId && (
         <button onClick={handleAdd} className="btn btn-xs btn-dash btn-success">
           +add to shelf

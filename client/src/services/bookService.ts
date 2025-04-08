@@ -52,3 +52,20 @@ export const addBookToShelf = async (userId: string, bookKey: string) => {
     throw new Error('Failed to add book');
   }
 };
+
+export const removeBook = async (userId: string, bookKey: string) => {
+  try {
+    const response = await axios.delete(
+      `${getApiUrl()}/users/${userId}/books`,
+      { data: { bookKey }, withCredentials: true }
+    );
+
+    return response.data;
+  } catch (error: any) {
+    console.error(
+      '❌ Request failed:',
+      error.response ? error.response.data : error.message
+    );
+    throw new Error('Failed to remove book');
+  }
+};

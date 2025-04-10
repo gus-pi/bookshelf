@@ -62,7 +62,7 @@ const BookCard = ({
           {edit && (
             <button
               onClick={onRemove}
-              className="btn btn-dash bottom-2 right-2 btn-error mx-auto absolute z-10"
+              className="btn btn-dash top-2 right-2 btn-error mx-auto absolute z-10"
             >
               Remove
             </button>

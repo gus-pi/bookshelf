@@ -64,6 +64,12 @@ const Bookshelf = () => {
         {userCredentials?.name === user ? (
           <div className="flex items-center gap-5">
             <h1 className="text-3xl my-5 text-slate-200">Your shelf</h1>
+            <button
+              className="btn btn-outline btn-accent btn-sm"
+              onClick={handleToggleEdit}
+            >
+              {editToggle ? <p>Done</p> : <p>Edit shelf</p>}
+            </button>
             {editToggle && (
               <Link
                 to={`/user/${userCredentials?.id}/add`}
@@ -72,12 +78,6 @@ const Bookshelf = () => {
                 Add a book
               </Link>
             )}
-            <button
-              className="btn btn-outline btn-accent btn-sm"
-              onClick={handleToggleEdit}
-            >
-              {editToggle ? <p>Done</p> : <p>Edit shelf</p>}
-            </button>
           </div>
         ) : (
           <h1 className="text-3xl my-5 text-slate-200">{user}'s books</h1>

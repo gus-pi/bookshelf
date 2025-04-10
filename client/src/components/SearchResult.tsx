@@ -3,9 +3,11 @@ import BookCard from './BookCard';
 import { addBookToShelf } from '@/services/bookService';
 import { useContext } from 'react';
 import { AuthContext } from '@/context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const SearchResult = ({ book }: { book: BookResult }) => {
   const bookKey = book.editions?.docs?.[0]?.key || '';
+  const navigate = useNavigate();
 
   const authContext = useContext(AuthContext);
 
@@ -20,7 +22,7 @@ const SearchResult = ({ book }: { book: BookResult }) => {
     try {
       if (userId) {
         await addBookToShelf(userId, bookKey);
-        alert('book added!');
+        navigate(`/user/${userId}`);
       }
     } catch (error) {
       console.log('error adding book from component');

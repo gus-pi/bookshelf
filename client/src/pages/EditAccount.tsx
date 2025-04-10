@@ -1,4 +1,5 @@
 import { AuthContext } from '@/context/AuthContext';
+import { getAuthenticatedUser } from '@/services/authService';
 import { updateUser } from '@/services/userService';
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -13,22 +14,29 @@ const EditAccount = () => {
     throw new Error('AuthContext.Provider is missing!');
   }
 
-  const { userCredentials } = authContext;
+  const { userCredentials, setUserCredentials } = authContext;
 
-  const [name, setName] = useState(userCredentials?.name);
-  const [email, setEmail] = useState(userCredentials?.email);
+  const [name, setName] = useState(userCredentials?.name || '');
+  const [email, setEmail] = useState(userCredentials?.email || '');
   const [password, setPassword] = useState('');
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(''); // Clear previous errors
     try {
-      //setUserCredentials(userData);
-      await updateUser();
-      alert('Registration complete');
-      navigate('/login');
+      const updatedUserData = { name, email, password };
+      await updateUser(updatedUserData);
+
+      // After successful update, re-fetch the authenticated user data
+      const updatedUser = await getAuthenticatedUser();
+      setUserCredentials(updatedUser);
+      localStorage.setItem('user', JSON.stringify(updatedUser)); // Update localStorage
+
+      navigate('/');
     } catch (error: any) {
       setError(
-        error.response?.data?.message || error.message || 'Register failed'
+        error.response?.data?.message ||
+          error.message ||
+          'Update account failed'
       );
     }
   };
@@ -51,8 +59,8 @@ const EditAccount = () => {
               fill="none"
               stroke="currentColor"
             >
-              <rect width="20" height="16" x="2" y="4" rx="2"></rect>
-              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+              <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
             </g>
           </svg>
           <input
@@ -148,7 +156,6 @@ const EditAccount = () => {
             name="confirmPassword"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            required
             placeholder="Confirm new password"
             minLength={6}
             // pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"

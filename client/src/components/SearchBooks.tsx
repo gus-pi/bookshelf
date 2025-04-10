@@ -14,7 +14,6 @@ const SearchBooks = () => {
     setLoading(true);
     setError(null);
     setResults(null);
-
     try {
       const data = await searchBooks(query);
       setResults(data);
@@ -70,13 +69,17 @@ const SearchBooks = () => {
 
       {error && <p className="text-red-500">{error}</p>}
 
-      <ul className="mt-5 grid grid-cols-3">
-        {results?.map((result) => (
-          <li key={result.editions?.docs?.[0]?.key}>
-            {<SearchResult book={result} />}
-          </li>
-        ))}
-      </ul>
+      {results && results.length > 0 ? (
+        <ul className="mt-5 grid lg:grid-cols-4 xl:grid-cols-6 md:grid-cols-3 sm:grid-cols-2">
+          {results?.map((result) => (
+            <li key={result.editions?.docs?.[0]?.key}>
+              {<SearchResult book={result} />}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p className="mt-5">No books found.</p>
+      )}
     </div>
   );
 };

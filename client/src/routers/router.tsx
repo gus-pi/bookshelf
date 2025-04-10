@@ -7,6 +7,7 @@ import Register from '@/pages/Register';
 import { createBrowserRouter } from 'react-router-dom';
 import PrivateRoute from './PrivateRoute';
 import Shelves from '@/pages/Shelves';
+import EditAccount from '@/pages/EditAccount';
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,14 @@ const router = createBrowserRouter([
       { path: '/shelves', element: <Shelves /> },
       { path: '/login', element: <Login /> },
       { path: '/register', element: <Register /> },
+      {
+        path: '/account',
+        element: (
+          <PrivateRoute>
+            <EditAccount />
+          </PrivateRoute>
+        ),
+      },
     ],
   },
 ]);

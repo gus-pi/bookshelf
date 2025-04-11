@@ -187,3 +187,18 @@ export const removeBook = async (req, res) => {
     res.status(500).json({ message: 'Error removing user book' });
   }
 };
+
+//get user by id
+export const searchUser = async (req, res) => {
+  const { query } = req.body;
+  try {
+    const users = await User.find({ name: { $regex: new RegExp(query, 'i') } });
+    if (!users) {
+      return res.status(404).json({ message: 'No user found' });
+    }
+    res.status(200).json(users);
+  } catch (error) {
+    console.log('Error fetching users: ', error);
+    res.status(500).json({ message: 'Error fetching users' });
+  }
+};

@@ -2,6 +2,7 @@ import UserListItem from '@/components/UserListItem';
 import { UserCredentials } from '@/lib/types';
 import { searchUsers } from '@/services/userService';
 import { useEffect, useState } from 'react';
+import { useDebouncedCallback } from 'use-debounce';
 
 const Shelves = () => {
   const [users, setUsers] = useState<UserCredentials[]>([]);
@@ -20,8 +21,12 @@ const Shelves = () => {
     }
   };
 
-  useEffect(() => {
+  const debouncedFetchUsers = useDebouncedCallback(() => {
     fetchUsers();
+  }, 400); // 400ms debounce
+
+  useEffect(() => {
+    debouncedFetchUsers();
   }, [searchQuery]);
 
   return (
@@ -46,7 +51,7 @@ const Shelves = () => {
         </svg>
         <input
           type="text"
-          placeholder="filter user"
+          placeholder="Search for a user"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
@@ -54,7 +59,7 @@ const Shelves = () => {
 
       <div className="overflow-x-auto ">
         {loading ? (
-          <p>Loading...</p>
+          <p className=" text-white mt-5">Loading...</p>
         ) : (
           <div>
             {users.length > 0 ? (
@@ -72,7 +77,7 @@ const Shelves = () => {
                 </tbody>
               </table>
             ) : (
-              <p>No users found.</p>
+              <p className="text-white mt-5">No users found.</p>
             )}
           </div>
         )}

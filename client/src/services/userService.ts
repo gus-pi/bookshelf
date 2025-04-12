@@ -12,6 +12,16 @@ export const getAllUsers = async () => {
   }
 };
 
+export const searchUsers = async (name: string) => {
+  try {
+    const response = await axios.get(`${getApiUrl()}/users/search`, { params: { name } });
+    const users = response.data;
+    return users;
+  } catch (error) {
+    console.log('Error fetching users');
+  }
+};
+
 export const updateUser = async (userData: { name: string, email: string, password: string }) => {
   try {
     const data = await axios.put(`${getApiUrl()}/users/update`, userData, { withCredentials: true });

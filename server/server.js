@@ -20,7 +20,7 @@ app.use(
   cors({
     origin:
       //'http://localhost:3000'
-      'https://bookshelfclient.vercel.app/',
+      'https://bookshelfclient.vercel.app',
     credentials: true,
   })
 );

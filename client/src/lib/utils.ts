@@ -6,5 +6,6 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function getApiUrl() {
-  return 'http://localhost:5000/api'
+  //return 'http://localhost:5000/api'
+  return 'https://bookshelfserver-pearl.vercel.app/api'
 }

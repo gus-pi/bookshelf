@@ -10,7 +10,7 @@ const Home = () => {
     throw new Error('AuthContext.Provider is missing!');
   }
 
-  const { userCredentials, setUserCredentials } = authContext;
+  const { userCredentials } = authContext;
 
   return (
     <div className="relative flex justify-center items-center h-screen max-h-[90vh] bg-black">

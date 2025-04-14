@@ -1,11 +1,10 @@
 import { BookDetails } from '@/lib/types';
-import { fetchBookData, removeBook } from '@/services/bookService';
+import { fetchBookData } from '@/services/bookService';
 import { useEffect, useState } from 'react';
 
 const BookCard = ({
   bookCode,
   edit,
-  user,
   onRemove,
 }: {
   bookCode: string;

@@ -1,4 +1,3 @@
-import { UserCredentials } from '@/lib/types';
 import { getApiUrl } from '@/lib/utils';
 import axios from 'axios';
 
